@@ -1,0 +1,15 @@
+.text-router-link_link-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+a.text-router-link {
+    color: var(--text-router-link-text-color);
+
+    width: 100%;
+    text-align: center;
+}

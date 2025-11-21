@@ -1,0 +1,15 @@
+services:
+  postgresql:
+    image: postgres:17.7
+    restart: always
+    environment:
+      POSTGRES_DB: home_library
+      POSTGRES_USER: home_library_backend
+      POSTGRES_PASSWORD: backend_test_1234
+    ports:
+      - "9999:5432"
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+
+volumes:
+  postgresql_data:

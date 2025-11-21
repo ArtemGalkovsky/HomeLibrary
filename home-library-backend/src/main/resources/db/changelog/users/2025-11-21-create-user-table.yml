@@ -1,0 +1,86 @@
+databaseChangeLog:
+  - changeSet:
+      id: "2025-11-21-create-user-table"
+      author: "Artem Galkovsky"
+      rollback:
+        - sql:
+            sql: DROP SCHEMA users_data;
+      changes:
+        - sql:
+              sql: CREATE SCHEMA users_data;
+        - createTable:
+            schemaName: users_data
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: role
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+        - createTable:
+            schemaName: users_data
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(254)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_active
+                  type: bool
+                  defaultValueBoolean: true
+                  defaultOnNull: false
+              - column:
+                  name: is_email_verified
+                  type: bool
+                  defaultValueBoolean: false
+                  defaultOnNull: false
+              - column:
+                  name: role_id
+                  type: int
+                  constraints:
+                    # IF NULL -> default role
+                    foreignKeyName: role_id
+                    references: users_data.roles(id)
+                    deleteCascade: false
+
+
+
+
+

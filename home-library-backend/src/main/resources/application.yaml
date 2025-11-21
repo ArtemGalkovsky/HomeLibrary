@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: home-library
+
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:9999/home_library
+    username: home_library_backend
+    password: backend_test_1234
+
+jwt:
+  access:
+    signing-key: "HELLO2303483048-783-4u309ryhfuodtgif7tr4g9uoj"
+    expiration-seconds: 900 # 15 minutes
+
+  refresh:
+    expiration-seconds: 1296000 # 15 days
+
+
+
+
+
+
