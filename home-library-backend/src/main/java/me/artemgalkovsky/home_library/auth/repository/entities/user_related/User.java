@@ -1,8 +1,9 @@
-package me.artemgalkovsky.home_library.auth.repository.entities;
+package me.artemgalkovsky.home_library.auth.repository.entities.user_related;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -29,9 +30,11 @@ public class User implements UserDetails {
     private String username;
 
     @Column(name = "created_at", nullable = false, updatable = false)
+    @CreationTimestamp
     private Date createdAt;
 
     @Column(name = "updated_at", nullable = false)
+    @UpdateTimestamp
     private Date updatedAt;
 
     @Column(name = "is_active")
@@ -41,6 +44,7 @@ public class User implements UserDetails {
     private Boolean isEmailVerified;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "role_id")
     private Role role;
 
     @Override

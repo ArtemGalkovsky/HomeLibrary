@@ -1,0 +1,121 @@
+databaseChangeLog:
+  - changeSet:
+      id: "2025-11-21-create-user-tokens-tables"
+      author: "Artem Galkovsky"
+
+      changes:
+        - createTable:
+            schemaName: users_data
+            tableName: auth_providers
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: provider
+                  type: varchar(25)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+        - createTable:
+            schemaName: users_data
+            tableName: user_auth_providers_table
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: user_id
+                    references: users_data.users(id)
+                    deleteCascade: false
+              - column:
+                  name: provider_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: provider_id
+                    references: users_data.auth_providers(id)
+                    deleteCascade: false
+              - column:
+                  name: used
+                  type: bool
+                  defaultOnNull: false
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            schemaName: users_data
+            tableName: local_jwt_provider_users_data
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: user_id
+                    references: users_data.users(id)
+                    deleteCascade: false
+              - column:
+                  name: access_token
+                  type: varchar(2048)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: access_token_expiration_timestamp
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: access_token_is_valid
+                  type: bool
+                  defaultValueBoolean: false
+                  defaultOnNull: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: refresh_token
+                  type: varchar(2048)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: refresh_token_expiration_timestamp
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: refresh_token_is_valid
+                  type: bool
+                  defaultValueBoolean: false
+                  defaultOnNull: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: datetime
+                  defaultValueComputed: NOW()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: datetime
+                  defaultValueComputed: NOW()
+                  constraints:
+                    nullable: false

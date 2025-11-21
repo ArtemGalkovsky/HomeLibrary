@@ -1,6 +1,6 @@
 package me.artemgalkovsky.home_library.auth.repository;
 
-import me.artemgalkovsky.home_library.auth.repository.entities.User;
+import me.artemgalkovsky.home_library.auth.repository.entities.user_related.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,7 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
-
-    @Query("SELECT user FROM User user WHERE user.email = :email")
-    Optional<User> findByEmail(@Param("email") String email);
+    Optional<User> findByEmail(String email);
 }

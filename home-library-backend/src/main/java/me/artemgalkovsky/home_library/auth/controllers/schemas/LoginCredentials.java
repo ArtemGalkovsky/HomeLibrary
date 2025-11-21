@@ -14,14 +14,12 @@ import lombok.Getter;
 public class LoginCredentials {
 
     @Schema(description = "User's email", example = "email@example.com")
-    @Size(min=5, max=254)
     @NotEmpty
     @NotNull
     @Email
     private final String email;
 
     @Schema(description = "User's password", example = "12345")
-    @Size(min=5, max=255)
     @NotEmpty
     @NotNull
     private final String password;

@@ -1,4 +1,4 @@
-package me.artemgalkovsky.home_library.auth.repository.entities;
+package me.artemgalkovsky.home_library.auth.repository.entities.user_related;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,6 +10,7 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "role",  nullable = false, unique = true)
     private String roleName;
 
     @Override

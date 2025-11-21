@@ -5,6 +5,9 @@ spring:
   application:
     name: home-library
 
+  main:
+    allow-bean-definition-overriding: true
+
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
 
@@ -13,6 +16,9 @@ spring:
     url: jdbc:postgresql://localhost:9999/home_library
     username: home_library_backend
     password: backend_test_1234
+
+  profiles:
+    active: dev
 
 jwt:
   access:

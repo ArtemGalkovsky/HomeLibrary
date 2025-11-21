@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: "3-2025-11-21-tables-add-id-autoincrement"
+      author: "Artem Galkovsky"
+
+      changes:
+        - addAutoIncrement:
+            tableName: users
+            schemaName: users_data
+            columnName: id
+
+        - addAutoIncrement:
+            tableName: auth_providers
+            schemaName: users_data
+            columnName: id
+
+        - addAutoIncrement:
+            tableName: local_jwt_provider_users_data
+            schemaName: users_data
+            columnName: id
+
+        - addAutoIncrement:
+            tableName: roles
+            schemaName: users_data
+            columnName: id
+
+        - addAutoIncrement:
+            tableName: user_auth_providers_table
+            schemaName: users_data
+            columnName: id
+

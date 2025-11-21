@@ -34,4 +34,11 @@ public class DefaultSecurityConfiguration {
     public SecureRandom secureRandom() {
         return new SecureRandom();
     }
+
+    @Bean
+    public SecurityConfig setSecureToSecurityCookies() {
+        return SecurityConfig.builder()
+                .setSecureToSecurityCookies(true)
+                .build();
+    }
 }

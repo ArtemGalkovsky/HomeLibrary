@@ -12,6 +12,7 @@ public class JwtTokenResponse {
     @Schema(description = "JWT Access token")
     private String accessToken;
 
-    @Schema(description = "JWT Refresh token")
-    private String refreshToken;
+    public JwtTokenResponse(String accessToken) {
+        this.accessToken = accessToken;
+    }
 }

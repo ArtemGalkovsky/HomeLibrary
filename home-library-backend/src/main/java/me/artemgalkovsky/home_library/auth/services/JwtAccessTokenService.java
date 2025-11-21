@@ -4,8 +4,8 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import me.artemgalkovsky.home_library.auth.controllers.schemas.LoginCredentials;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,6 +22,7 @@ public class JwtAccessTokenService {
     @Value("${jwt.access.signing-key}")
     private String jwtAccessTokenSigningKey;
 
+    @Getter
     @Value("${jwt.access.expiration-seconds}")
     private int jwtAccessTokenExpirationSeconds;
 
@@ -32,11 +33,11 @@ public class JwtAccessTokenService {
         acessTokenSecretKey = Keys.hmacShaKeyFor(jwtAccessTokenSigningKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String generateJwtAccessToken(LoginCredentials loginCredentials) {
+    public String generateJwtAccessToken(String email) {
         Date now = Calendar.getInstance().getTime();
 
         return Jwts.builder()
-                .subject(loginCredentials.getEmail())
+                .subject(email)
                 .issuedAt(now)
                 .expiration(DateUtils.addSeconds(now, jwtAccessTokenExpirationSeconds))
                 .signWith(acessTokenSecretKey)
